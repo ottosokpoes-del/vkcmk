@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const benefitsRef = useRef<HTMLDivElement>(null);
-  const parallaxRef = useRef<HTMLDivElement>(null);
   const luxuryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

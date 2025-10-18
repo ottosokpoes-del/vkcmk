@@ -107,7 +107,7 @@ const mockCars: Car[] = [
 
 export const useAppStore = create<AppState & AppActions>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       cars: mockCars,
       favorites: [],
       user: null,

@@ -4,7 +4,6 @@ type Car = Database['public']['Tables']['cars']['Row']
 type CarInsert = Database['public']['Tables']['cars']['Insert']
 type CarUpdate = Database['public']['Tables']['cars']['Update']
 type Favorite = Database['public']['Tables']['favorites']['Row']
-type FavoriteInsert = Database['public']['Tables']['favorites']['Insert']
 
 export interface CarFilters {
   brand?: string

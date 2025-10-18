@@ -5,10 +5,8 @@ import { useTwoFactorAuth } from '../hooks/useTwoFactorAuth';
 const AdminLogin = () => {
   const navigate = useNavigate();
   const { 
-    isCodeSent, 
     isLoading: isCodeLoading, 
     error: codeError, 
-    attempts,
     sendVerificationCode, 
     verifyCode, 
     resendCode, 

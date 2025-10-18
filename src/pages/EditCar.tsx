@@ -7,7 +7,7 @@ import { Car } from '../types';
 const EditCar = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { cars, updateCar, user } = useAppStore();
+  const { cars, updateCar } = useAppStore();
   
   const [formData, setFormData] = useState({
     title: '',
