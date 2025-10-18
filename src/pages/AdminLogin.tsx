@@ -182,14 +182,13 @@ const AdminLogin = () => {
                   name="verificationCode"
                   type="text"
                   required
-                  maxLength={6}
                   className="mt-1 appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-sahibinden-red focus:border-sahibinden-red focus:z-10 sm:text-sm text-center text-2xl tracking-widest"
-                  placeholder="000000"
+                  placeholder="Doğrulama kodunu girin"
                   value={formData.verificationCode}
                   onChange={handleChange}
                 />
                 <p className="mt-2 text-xs text-gray-500 text-center">
-                  6 haneli doğrulama kodunu girin
+                  Doğrulama kodunu girin
                 </p>
               </div>
             </div>

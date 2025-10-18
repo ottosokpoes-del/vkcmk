@@ -46,102 +46,33 @@ const AddCar = () => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    // Validate title
-    const titleValidation = InputValidator.validateText(formData.title, {
-      minLength: 5,
-      maxLength: 200,
-      required: true,
-      pattern: /^[a-zA-Z0-9\s\-\.]+$/
-    });
-    if (!titleValidation.isValid) {
-      newErrors.title = titleValidation.error || 'Invalid title format';
+    // Sadece temel kontroller - hiçbir sınırlama yok
+    if (!formData.title.trim()) {
+      newErrors.title = 'Başlık gereklidir';
+    }
+    if (!formData.brand.trim()) {
+      newErrors.brand = 'Marka gereklidir';
+    }
+    if (!formData.model.trim()) {
+      newErrors.model = 'Model gereklidir';
+    }
+    if (!formData.price || isNaN(Number(formData.price)) || Number(formData.price) <= 0) {
+      newErrors.price = 'Geçerli bir fiyat giriniz';
+    }
+    if (!formData.year || isNaN(Number(formData.year)) || Number(formData.year) <= 0) {
+      newErrors.year = 'Geçerli bir yıl giriniz';
+    }
+    if (!formData.mileage || isNaN(Number(formData.mileage)) || Number(formData.mileage) < 0) {
+      newErrors.mileage = 'Geçerli bir kilometre giriniz';
+    }
+    if (!formData.location.trim()) {
+      newErrors.location = 'Konum gereklidir';
+    }
+    if (!formData.description.trim()) {
+      newErrors.description = 'Açıklama gereklidir';
     }
 
-    // Validate brand
-    const brandValidation = InputValidator.validateText(formData.brand, {
-      minLength: 2,
-      maxLength: 50,
-      required: true,
-      pattern: /^[a-zA-Z\s]+$/
-    });
-    if (!brandValidation.isValid) {
-      newErrors.brand = brandValidation.error || 'Invalid brand format';
-    }
-
-    // Validate model
-    const modelValidation = InputValidator.validateText(formData.model, {
-      minLength: 1,
-      maxLength: 50,
-      required: true,
-      pattern: /^[a-zA-Z0-9\s\-\.]+$/
-    });
-    if (!modelValidation.isValid) {
-      newErrors.model = modelValidation.error || 'Invalid model format';
-    }
-
-    // Validate price
-    const priceValidation = InputValidator.validateNumber(formData.price, {
-      min: 1000,
-      max: 50000000,
-      required: true,
-      integer: true
-    });
-    if (!priceValidation.isValid) {
-      newErrors.price = priceValidation.error || 'Invalid price';
-    }
-
-    // Validate year
-    const yearValidation = InputValidator.validateNumber(formData.year, {
-      min: 1990,
-      max: 2024,
-      required: true,
-      integer: true
-    });
-    if (!yearValidation.isValid) {
-      newErrors.year = yearValidation.error || 'Invalid year';
-    }
-
-    // Validate mileage
-    const mileageValidation = InputValidator.validateNumber(formData.mileage, {
-      min: 0,
-      max: 1000000,
-      required: true,
-      integer: true
-    });
-    if (!mileageValidation.isValid) {
-      newErrors.mileage = mileageValidation.error || 'Invalid mileage';
-    }
-
-    // Validate location
-    const locationValidation = InputValidator.validateText(formData.location, {
-      minLength: 2,
-      maxLength: 100,
-      required: true,
-      pattern: /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/
-    });
-    if (!locationValidation.isValid) {
-      newErrors.location = locationValidation.error || 'Invalid location format';
-    }
-
-    // Validate description
-    const descriptionValidation = InputValidator.validateText(formData.description, {
-      minLength: 10,
-      maxLength: 2000,
-      required: true
-    });
-    if (!descriptionValidation.isValid) {
-      newErrors.description = descriptionValidation.error || 'Invalid description';
-    }
-
-    // Validate images
-    formData.images.forEach((image, index) => {
-      if (image.trim()) {
-        const urlValidation = InputValidator.validateUrl(image);
-        if (!urlValidation.isValid) {
-          newErrors[`image_${index}`] = 'Invalid image URL';
-        }
-      }
-    });
+    // Image validation kaldırıldı - herhangi bir URL kabul edilir
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

@@ -80,12 +80,13 @@ const EditCar = () => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
+    // Sadece temel kontroller - hiçbir sınırlama yok
     if (!formData.title.trim()) newErrors.title = 'Başlık gereklidir';
     if (!formData.price || isNaN(Number(formData.price)) || Number(formData.price) <= 0) {
       newErrors.price = 'Geçerli bir fiyat giriniz';
     }
-    if (!formData.year || isNaN(Number(formData.year)) || Number(formData.year) < 1990 || Number(formData.year) > 2024) {
-      newErrors.year = 'Geçerli bir yıl giriniz (1990-2024)';
+    if (!formData.year || isNaN(Number(formData.year)) || Number(formData.year) <= 0) {
+      newErrors.year = 'Geçerli bir yıl giriniz';
     }
     if (!formData.mileage || isNaN(Number(formData.mileage)) || Number(formData.mileage) < 0) {
       newErrors.mileage = 'Geçerli bir kilometre giriniz';
