@@ -177,32 +177,33 @@ const AddCar = () => {
         images: formData.images.filter(img => img.trim() !== '')
       };
 
-    const newCar: Car = {
+    try {
+      const newCar: Car = {
         id: SecurityUtils.generateSecureToken(16),
         title: sanitizedFormData.title,
         brand: sanitizedFormData.brand,
         model: sanitizedFormData.model,
-      price: Number(formData.price),
-      year: Number(formData.year),
-      mileage: Number(formData.mileage),
-      fuel: formData.fuel,
-      transmission: formData.transmission,
+        price: Number(formData.price),
+        year: Number(formData.year),
+        mileage: Number(formData.mileage),
+        fuel: formData.fuel,
+        transmission: formData.transmission,
         location: sanitizedFormData.location,
-      sellerType: formData.sellerType,
+        sellerType: formData.sellerType,
         description: sanitizedFormData.description,
         images: sanitizedFormData.images,
         technicalSpecs: sanitizedFormData.technicalSpecs,
         features: sanitizedFormData.features,
         safety: sanitizedFormData.safety,
-      isNew: formData.isNew,
-      createdAt: new Date().toISOString()
-    };
+        isNew: formData.isNew,
+        createdAt: new Date().toISOString()
+      };
 
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-    addCar(newCar);
-    navigate('/admin');
+      addCar(newCar);
+      navigate('/admin');
     } catch (error) {
       console.error('Error adding car:', error);
       setErrors({ general: 'An error occurred while adding the car. Please try again.' });
