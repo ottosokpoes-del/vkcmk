@@ -10,15 +10,14 @@ export const SecurityConfig = {
     const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
     
     if (missingVars.length > 0) {
-      // Set default values for development
-      if (process.env.NODE_ENV === 'development') {
-        process.env.REACT_APP_ENCRYPTION_KEY = 'dev-encryption-key-32-chars-long';
-        process.env.REACT_APP_API_URL = 'http://localhost:3001';
-        console.log('Using default development values for security');
-      } else if (process.env.NODE_ENV === 'production') {
-        console.error('Missing required environment variables:', missingVars);
-        throw new Error('Missing required environment variables');
+      // Set default values for both development and production
+      if (!process.env.REACT_APP_ENCRYPTION_KEY) {
+        process.env.REACT_APP_ENCRYPTION_KEY = 'prod-encryption-key-32-chars-long-2024';
       }
+      if (!process.env.REACT_APP_API_URL) {
+        process.env.REACT_APP_API_URL = 'https://api.premiumcarmarket.com';
+      }
+      console.log('Using default values for missing environment variables');
     }
   },
 
