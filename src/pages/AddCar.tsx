@@ -176,8 +176,6 @@ const AddCar = () => {
         safety: formData.safety.map(s => SecurityUtils.sanitizeHtml(s.trim())).filter(s => s !== ''),
         images: formData.images.filter(img => img.trim() !== '')
       };
-
-    try {
       const newCar: Car = {
         id: SecurityUtils.generateSecureToken(16),
         title: sanitizedFormData.title,
