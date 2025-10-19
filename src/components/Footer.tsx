@@ -1,72 +1,21 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail, FiPhone, FiMapPin, FiHeart } from 'react-icons/fi';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
-  const footerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    // Add a small delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
-        // Wait for the footer to be rendered
-        const footerElement = footerRef.current;
-        if (!footerElement) return;
-
-        // Footer links fade-in animation
-        gsap.from(".footer-link", {
-          opacity: 0,
-          y: 20,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: footerElement,
-            start: "top 90%",
-            end: "bottom 10%",
-          },
-        });
-
-        // Footer content slide-up animation
-        gsap.from(".footer-content", {
-          opacity: 0,
-          y: 30,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: footerElement,
-            start: "top 90%",
-            end: "bottom 10%",
-          },
-        });
-      }, footerRef);
-
-      return () => ctx.revert();
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
   return (
-    <footer ref={footerRef} className="footer-section bg-gray-900 text-white">
+    <footer className="footer-section bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="footer-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-sahibinden-red rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
+              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">G</span>
               </div>
-              <span className="text-2xl font-bold">CarMarket</span>
+              <span className="text-2xl font-bold">GraderMarket</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
-              Premium araç pazarında güvenilir ve kaliteli hizmet sunuyoruz. 
+              Premium grader ve parça pazarında güvenilir ve kaliteli hizmet sunuyoruz. 
               Her detayda mükemmellik arayışımızla, sizlere en iyi deneyimi sunmaya devam ediyoruz.
             </p>
             <div className="flex space-x-4">
@@ -90,36 +39,36 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-6">Hızlı Linkler</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  Home
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors">
+                  Ana Sayfa
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  Gallery
+                <Link to="/gallery" className="text-gray-400 hover:text-white transition-colors">
+                  Galeri
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  About Us
+                <Link to="/parts" className="text-gray-400 hover:text-white transition-colors">
+                  Parçalar
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  Contact
+                <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
+                  Hakkımızda
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  FAQ
+                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                  İletişim
                 </Link>
               </li>
               <li>
-                <Link to="/admin-login" className="footer-link text-gray-400 hover:text-white transition-colors">
-                  Giriş
+                <Link to="/faq" className="text-gray-400 hover:text-white transition-colors">
+                  SSS
                 </Link>
               </li>
             </ul>
@@ -127,22 +76,22 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Info</h3>
+            <h3 className="text-lg font-semibold mb-6">İletişim Bilgileri</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <FiMapPin className="w-5 h-5 text-sahibinden-red flex-shrink-0" />
+                <FiMapPin className="w-5 h-5 text-orange-600 flex-shrink-0" />
                 <span className="text-gray-400">
                   Maslak Mahallesi, Büyükdere Caddesi<br />
                   No: 123, Sarıyer/İstanbul
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <FiPhone className="w-5 h-5 text-sahibinden-red flex-shrink-0" />
-                <span className="text-gray-400">+90 (212) 555 0123</span>
+                <FiPhone className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                <span className="text-gray-400">07006268722</span>
               </div>
               <div className="flex items-center space-x-3">
-                <FiMail className="w-5 h-5 text-sahibinden-red flex-shrink-0" />
-                <span className="text-gray-400">info@carmarket.com</span>
+                <FiMail className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                <span className="text-gray-400">info@grader-marketplace.com</span>
               </div>
             </div>
           </div>
@@ -153,11 +102,11 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 text-gray-400 mb-4 md:mb-0">
               <span>Made with</span>
-              <FiHeart className="w-4 h-4 text-sahibinden-red" />
-              <span>for car enthusiasts</span>
+              <FiHeart className="w-4 h-4 text-orange-600" />
+              <span>for grader enthusiasts</span>
             </div>
             <div className="text-gray-400 text-sm">
-              © 2024 CarMarket. All rights reserved.
+              © 2024 GraderMarket. All rights reserved.
             </div>
           </div>
         </div>

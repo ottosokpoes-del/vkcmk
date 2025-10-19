@@ -10,7 +10,7 @@ module.exports = {
         'inter': ['Inter', 'sans-serif'],
       },
       colors: {
-        'sahibinden-red': '#e60000',
+        'grader-orange': '#ea580c',
       },
       spacing: {
         '18': '4.5rem',

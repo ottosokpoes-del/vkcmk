@@ -17,12 +17,56 @@ export interface CarFilters {
   isSold?: boolean
 }
 
+import { supabase, Database } from '../config/supabase'
+
+type Car = Database['public']['Tables']['cars']['Row']
+type CarInsert = Database['public']['Tables']['cars']['Insert']
+type CarUpdate = Database['public']['Tables']['cars']['Update']
+type Favorite = Database['public']['Tables']['favorites']['Row']
+
+export interface CarFilters {
+  brand?: string
+  minPrice?: number
+  maxPrice?: number
+  fuelType?: string
+  transmission?: string
+  minYear?: number
+  maxYear?: number
+  isFeatured?: boolean
+  isSold?: boolean
+  search?: string
+  limit?: number
+  offset?: number
+}
+
+// Cache for frequently accessed data
+const cache = new Map<string, { data: any; timestamp: number; ttl: number }>()
+const CACHE_TTL = 5 * 60 * 1000 // 5 minutes
+
+function getCachedData(key: string) {
+  const cached = cache.get(key)
+  if (cached && Date.now() - cached.timestamp < cached.ttl) {
+    return cached.data
+  }
+  cache.delete(key)
+  return null
+}
+
+function setCachedData(key: string, data: any, ttl = CACHE_TTL) {
+  cache.set(key, { data, timestamp: Date.now(), ttl })
+}
+
 export class SupabaseService {
-  // Car methods
+  // Car methods with optimized queries
   static async getCars(filters?: CarFilters): Promise<Car[]> {
+    const cacheKey = `cars:${JSON.stringify(filters)}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
     let query = supabase
       .from('cars')
       .select('*')
+      .eq('is_sold', false) // Only show available cars by default
       .order('created_at', { ascending: false })
 
     if (filters) {
@@ -53,6 +97,15 @@ export class SupabaseService {
       if (filters.isSold !== undefined) {
         query = query.eq('is_sold', filters.isSold)
       }
+      if (filters.search) {
+        query = query.or(`brand.ilike.%${filters.search}%,model.ilike.%${filters.search}%,description.ilike.%${filters.search}%`)
+      }
+      if (filters.limit) {
+        query = query.limit(filters.limit)
+      }
+      if (filters.offset) {
+        query = query.range(filters.offset, filters.offset + (filters.limit || 20) - 1)
+      }
     }
 
     const { data, error } = await query
@@ -61,10 +114,16 @@ export class SupabaseService {
       throw new Error(`Failed to fetch cars: ${error.message}`)
     }
 
-    return data || []
+    const result = data || []
+    setCachedData(cacheKey, result)
+    return result
   }
 
   static async getCarById(id: string): Promise<Car | null> {
+    const cacheKey = `car:${id}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
     const { data, error } = await supabase
       .from('cars')
       .select('*')
@@ -78,8 +137,104 @@ export class SupabaseService {
       throw new Error(`Failed to fetch car: ${error.message}`)
     }
 
+    setCachedData(cacheKey, data, 10 * 60 * 1000) // Cache for 10 minutes
     return data
   }
+
+  static async getFeaturedCars(limit = 6): Promise<Car[]> {
+    const cacheKey = `featured-cars:${limit}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
+    const { data, error } = await supabase
+      .from('cars')
+      .select('*')
+      .eq('is_featured', true)
+      .eq('is_sold', false)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) {
+      throw new Error(`Failed to fetch featured cars: ${error.message}`)
+    }
+
+    const result = data || []
+    setCachedData(cacheKey, result, 15 * 60 * 1000) // Cache for 15 minutes
+    return result
+  }
+
+  static async getCarsByBrand(brand: string, limit = 20): Promise<Car[]> {
+    const cacheKey = `cars-brand:${brand}:${limit}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
+    const { data, error } = await supabase
+      .from('cars')
+      .select('*')
+      .eq('brand', brand)
+      .eq('is_sold', false)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) {
+      throw new Error(`Failed to fetch cars by brand: ${error.message}`)
+    }
+
+    const result = data || []
+    setCachedData(cacheKey, result)
+    return result
+  }
+
+  static async searchCars(searchTerm: string, filters?: Omit<CarFilters, 'search'>): Promise<Car[]> {
+    const cacheKey = `search:${searchTerm}:${JSON.stringify(filters)}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
+    let query = supabase
+      .from('cars')
+      .select('*')
+      .eq('is_sold', false)
+      .or(`brand.ilike.%${searchTerm}%,model.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`)
+      .order('created_at', { ascending: false })
+
+    if (filters) {
+      if (filters.brand) {
+        query = query.eq('brand', filters.brand)
+      }
+      if (filters.minPrice !== undefined) {
+        query = query.gte('price', filters.minPrice)
+      }
+      if (filters.maxPrice !== undefined) {
+        query = query.lte('price', filters.maxPrice)
+      }
+      if (filters.fuelType) {
+        query = query.eq('fuel_type', filters.fuelType)
+      }
+      if (filters.transmission) {
+        query = query.eq('transmission', filters.transmission)
+      }
+      if (filters.minYear !== undefined) {
+        query = query.gte('year', filters.minYear)
+      }
+      if (filters.maxYear !== undefined) {
+        query = query.lte('year', filters.maxYear)
+      }
+      if (filters.isFeatured !== undefined) {
+        query = query.eq('is_featured', filters.isFeatured)
+      }
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      throw new Error(`Failed to search cars: ${error.message}`)
+    }
+
+    const result = data || []
+    setCachedData(cacheKey, result, 2 * 60 * 1000) // Cache for 2 minutes
+    return result
+  }
+
 
   static async createCar(carData: CarInsert): Promise<Car> {
     const { data, error } = await supabase
@@ -92,6 +247,8 @@ export class SupabaseService {
       throw new Error(`Failed to create car: ${error.message}`)
     }
 
+    // Invalidate relevant caches
+    this.invalidateCarCaches()
     return data
   }
 
@@ -107,6 +264,9 @@ export class SupabaseService {
       throw new Error(`Failed to update car: ${error.message}`)
     }
 
+    // Invalidate relevant caches
+    this.invalidateCarCaches()
+    cache.delete(`car:${id}`)
     return data
   }
 
@@ -119,10 +279,29 @@ export class SupabaseService {
     if (error) {
       throw new Error(`Failed to delete car: ${error.message}`)
     }
+
+    // Invalidate relevant caches
+    this.invalidateCarCaches()
+    cache.delete(`car:${id}`)
   }
 
-  // Favorite methods
+  // Cache invalidation helper
+  private static invalidateCarCaches() {
+    const keysToDelete = Array.from(cache.keys()).filter(key => 
+      key.startsWith('cars:') || 
+      key.startsWith('featured-cars:') || 
+      key.startsWith('cars-brand:') || 
+      key.startsWith('search:')
+    )
+    keysToDelete.forEach(key => cache.delete(key))
+  }
+
+  // Favorite methods with optimized queries
   static async getFavorites(userId: string): Promise<Favorite[]> {
+    const cacheKey = `favorites:${userId}`
+    const cached = getCachedData(cacheKey)
+    if (cached) return cached
+
     const { data, error } = await supabase
       .from('favorites')
       .select(`
@@ -136,7 +315,9 @@ export class SupabaseService {
       throw new Error(`Failed to fetch favorites: ${error.message}`)
     }
 
-    return data || []
+    const result = data || []
+    setCachedData(cacheKey, result, 3 * 60 * 1000) // Cache for 3 minutes
+    return result
   }
 
   static async addToFavorites(userId: string, carId: string): Promise<Favorite> {
@@ -150,6 +331,8 @@ export class SupabaseService {
       throw new Error(`Failed to add to favorites: ${error.message}`)
     }
 
+    // Invalidate favorites cache
+    cache.delete(`favorites:${userId}`)
     return data
   }
 
@@ -163,9 +346,16 @@ export class SupabaseService {
     if (error) {
       throw new Error(`Failed to remove from favorites: ${error.message}`)
     }
+
+    // Invalidate favorites cache
+    cache.delete(`favorites:${userId}`)
   }
 
   static async isFavorite(userId: string, carId: string): Promise<boolean> {
+    const cacheKey = `favorite-check:${userId}:${carId}`
+    const cached = getCachedData(cacheKey)
+    if (cached !== null) return cached
+
     const { data, error } = await supabase
       .from('favorites')
       .select('id')
@@ -175,12 +365,15 @@ export class SupabaseService {
 
     if (error) {
       if (error.code === 'PGRST116') {
+        setCachedData(cacheKey, false, 1 * 60 * 1000) // Cache for 1 minute
         return false // Not found, so not favorite
       }
       throw new Error(`Failed to check favorite status: ${error.message}`)
     }
 
-    return !!data
+    const result = !!data
+    setCachedData(cacheKey, result, 1 * 60 * 1000) // Cache for 1 minute
+    return result
   }
 
   // User methods

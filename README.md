@@ -1,6 +1,6 @@
-# 🚗 Premium Car Marketplace
+# 🚜 Premium Grader & Parts Marketplace
 
-A modern, high-performance React-based car marketplace inspired by Sahibinden.com, featuring a premium design and smooth user experience with **Supabase** backend integration.
+A modern, high-performance React-based grader and parts marketplace featuring Cat and Komatsu brands, with a premium design and smooth user experience with **Supabase** backend integration.
 
 ## ✨ Features
 
@@ -8,7 +8,7 @@ A modern, high-performance React-based car marketplace inspired by Sahibinden.co
 - **Supabase Integration**: Real-time database, authentication, and storage
 - **Role-based Authentication**: User and Admin roles with different permissions
 - **Advanced Filtering**: Smart filters for brand, year, price, fuel type, transmission, and location
-- **Favorites System**: Save and manage favorite car listings
+- **Favorites System**: Save and manage favorite grader and parts listings
 - **Image Gallery**: Swiper.js powered image carousels with thumbnail navigation
 - **Responsive Design**: Optimized for mobile, tablet, and desktop
 - **State Management**: Zustand with localStorage persistence
@@ -49,9 +49,9 @@ A modern, high-performance React-based car marketplace inspired by Sahibinden.co
 ## 📱 Pages & Features
 
 ### Public Pages
-- **Gallery (Homepage)**: Browse cars with advanced filtering
-- **Car Details**: Detailed car information with image gallery
-- **Favorites**: Manage saved car listings
+- **Gallery (Homepage)**: Browse graders and parts with advanced filtering
+- **Grader Details**: Detailed grader information with image gallery
+- **Favorites**: Manage saved grader and parts listings
 - **About**: Company information
 - **Contact**: Contact form and information
 - **FAQ**: Frequently asked questions
@@ -64,13 +64,13 @@ A modern, high-performance React-based car marketplace inspired by Sahibinden.co
 - **Session Management**: Persistent sessions with Supabase
 
 ### Admin Features
-- **Dashboard**: Manage car listings
-- **CRUD Operations**: Create, read, update, delete cars
+- **Dashboard**: Manage grader and parts listings
+- **CRUD Operations**: Create, read, update, delete graders and parts
 - **Statistics**: Overview of listings and metrics
 
 ## 🎨 Design System
 
-- **Primary Color**: Sahibinden Red (#e60000)
+- **Primary Color**: Grader Orange (#ea580c)
 - **Typography**: Inter font family (300-700 weights)
 - **Spacing**: 16px baseline grid
 - **Components**: Reusable button and card components
@@ -99,11 +99,11 @@ A modern, high-performance React-based car marketplace inspired by Sahibinden.co
 src/
 ├── components/          # Reusable UI components
 │   ├── Navbar.tsx      # Navigation bar
-│   ├── CarCard.tsx     # Car listing card
+│   ├── GraderCard.tsx  # Grader listing card
 │   └── FilterSidebar.tsx # Advanced filtering
 ├── pages/              # Page components
-│   ├── Gallery.tsx     # Homepage with car listings
-│   ├── CarDetails.tsx  # Detailed car view
+│   ├── Gallery.tsx     # Homepage with grader listings
+│   ├── GraderDetails.tsx # Detailed grader view
 │   ├── Favorites.tsx   # User favorites
 │   ├── AdminDashboard.tsx # Admin panel
 │   ├── Login.tsx       # Authentication
@@ -147,8 +147,8 @@ src/
 
 For testing purposes, you can login with any username/password combination:
 
-- **User Role**: Browse cars, add to favorites, contact sellers
-- **Admin Role**: Manage car listings, view statistics, CRUD operations
+- **User Role**: Browse graders and parts, add to favorites, contact sellers
+- **Admin Role**: Manage grader and parts listings, view statistics, CRUD operations
 
 ## 🚀 Deployment
 

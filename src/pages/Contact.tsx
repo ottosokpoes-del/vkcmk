@@ -143,7 +143,7 @@ const Contact = () => {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sahibinden-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300"
                     placeholder="Your full name"
                   />
                 </div>
@@ -160,7 +160,7 @@ const Contact = () => {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sahibinden-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -177,7 +177,7 @@ const Contact = () => {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sahibinden-red focus:border-transparent transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300"
                     placeholder="What's this about?"
                   />
                 </div>
@@ -194,7 +194,7 @@ const Contact = () => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sahibinden-red focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all duration-300 resize-none"
                     placeholder="Tell us more about your inquiry..."
                   />
                 </div>
@@ -202,7 +202,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="submit-btn w-full bg-sahibinden-red text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                  className="submit-btn w-full bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -233,7 +233,7 @@ const Contact = () => {
               </h2>
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-sahibinden-red rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <FiMapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -247,18 +247,18 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-sahibinden-red rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <FiPhone className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
                     <p className="text-gray-600">
-                      <a href="tel:+902125550123" className="hover:text-sahibinden-red transition-colors">
+                      <a href="tel:+902125550123" className="hover:text-orange-600 transition-colors">
                         +90 (212) 555 0123
                       </a>
                     </p>
                     <p className="text-gray-600">
-                      <a href="tel:+902125550124" className="hover:text-sahibinden-red transition-colors">
+                      <a href="tel:+902125550124" className="hover:text-orange-600 transition-colors">
                         +90 (212) 555 0124
                       </a>
                     </p>
@@ -266,19 +266,19 @@ const Contact = () => {
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-sahibinden-red rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <FiMail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Email</h3>
                     <p className="text-gray-600">
-                      <a href="mailto:info@carmarket.com" className="hover:text-sahibinden-red transition-colors">
-                        info@carmarket.com
+                      <a href="mailto:info@gradermarket.com" className="hover:text-orange-600 transition-colors">
+                        info@gradermarket.com
                       </a>
                     </p>
                     <p className="text-gray-600">
-                      <a href="mailto:support@carmarket.com" className="hover:text-sahibinden-red transition-colors">
-                        support@carmarket.com
+                      <a href="mailto:support@gradermarket.com" className="hover:text-orange-600 transition-colors">
+                        support@gradermarket.com
                       </a>
                     </p>
                   </div>
@@ -316,7 +316,7 @@ const Contact = () => {
               Find Us
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Visit our showroom and experience our premium vehicles in person
+              Visit our showroom and experience our premium graders and parts in person
             </p>
           </div>
 
@@ -324,7 +324,7 @@ const Contact = () => {
             <div className="h-96 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center relative">
               {/* Simple map placeholder with interactive elements */}
               <div className="text-center p-8">
-                <div className="w-20 h-20 bg-sahibinden-red rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <div className="w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                   <FiMapPin className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Harita Konumu</h3>
@@ -339,7 +339,7 @@ const Contact = () => {
                     href="https://www.google.com/maps/search/Maslak,+Istanbul" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-sahibinden-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 flex items-center justify-center space-x-2"
+                    className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-300 flex items-center justify-center space-x-2"
                   >
                     <FiMapPin className="w-5 h-5" />
                     <span>Google Maps'te Aç</span>

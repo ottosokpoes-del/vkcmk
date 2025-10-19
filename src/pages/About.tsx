@@ -78,9 +78,9 @@ const About = () => {
         });
       });
 
-      // Timeline car icons slow movement with acceleration
-      gsap.utils.toArray(".timeline-dot").forEach((car: any, index) => {
-        gsap.to(car, {
+      // Timeline grader icons slow movement with acceleration
+      gsap.utils.toArray(".timeline-dot").forEach((grader: any, index) => {
+        gsap.to(grader, {
           x: 8,
           duration: 4 + index * 0.5,
           ease: "power1.inOut",
@@ -121,10 +121,10 @@ const About = () => {
   }, []);
 
   const milestones = [
-    { year: "2010", title: "Foundation", description: "CarMarket was founded with a vision to revolutionize the automotive marketplace." },
-    { year: "2015", title: "Expansion", description: "We expanded our services across major cities, reaching thousands of customers." },
+    { year: "2010", title: "Foundation", description: "GraderMarket was founded with a vision to revolutionize the construction equipment marketplace." },
+    { year: "2015", title: "Expansion", description: "We expanded our services across major cities, reaching thousands of construction companies." },
     { year: "2020", title: "Digital Innovation", description: "Launched our digital platform with advanced features and AI-powered recommendations." },
-    { year: "2024", title: "Premium Focus", description: "Shifted focus to premium vehicles, becoming the leading luxury car marketplace." }
+    { year: "2024", title: "Premium Focus", description: "Shifted focus to premium graders and parts, becoming the leading construction equipment marketplace." }
   ];
 
   const teamMembers = [
@@ -141,15 +141,15 @@ const About = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=600&fit=crop")'
+            backgroundImage: 'url("/rsm/Grader02.jpg")'
           }}
         />
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8">
           <h1 className="hero-title text-5xl md:text-6xl font-bold mb-4">
-            Innovation Meets Emotion
+            Innovation Meets Power
           </h1>
           <p className="hero-subtitle text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
-            Discover the story behind CarMarket's commitment to automotive excellence
+            Discover the story behind GraderMarket's commitment to construction equipment excellence
           </p>
         </div>
       </section>
@@ -163,22 +163,22 @@ const About = () => {
                 Our Story
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Founded in 2010, CarMarket began as a small team with a big dream: to transform 
-                how people buy and sell premium vehicles. What started as a local marketplace 
-                has grown into Turkey's most trusted platform for luxury automotive experiences.
+                Founded in 2010, GraderMarket began as a small team with a big dream: to transform 
+                how people buy and sell premium construction equipment. What started as a local marketplace 
+                has grown into Turkey's most trusted platform for heavy machinery experiences.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Our journey has been marked by continuous innovation, unwavering commitment to 
-                quality, and an unshakeable belief that every car enthusiast deserves access to 
-                exceptional vehicles and service.
+                quality, and an unshakeable belief that every construction company deserves access to 
+                exceptional graders and parts.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-sahibinden-red mb-2">14+</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">14+</div>
                   <div className="text-gray-600">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-sahibinden-red mb-2">50K+</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">50K+</div>
                   <div className="text-gray-600">Happy Customers</div>
                 </div>
               </div>
@@ -186,7 +186,7 @@ const About = () => {
             <div className="story-image">
               <div className="relative rounded-xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&h=600&fit=crop"
+                  src="/rsm/Budowa_Velostrady_nr_6_-_odcinek_Katowice_Brynów_-_Katowice_Brynów,_wyrównywarka_oraz_walec_podczas_pracy.jpg"
                   alt="Company Story"
                   className="w-full h-96 object-cover"
                 />
@@ -204,7 +204,7 @@ const About = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=600&fit=crop")'
+              backgroundImage: 'url("/rsm/Grader02.jpg")'
             }}
           />
         </div>
@@ -215,17 +215,19 @@ const About = () => {
               Our Journey
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Key milestones that shaped our commitment to automotive excellence
+              Key milestones that shaped our commitment to construction equipment excellence
             </p>
           </div>
 
           <div className="relative">
-            {/* Road Line */}
-            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-16 h-full">
+            {/* Road Line - 2 Lane Highway */}
+            <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-20 h-full">
               {/* Road surface */}
               <div className="absolute inset-0 bg-gradient-to-b from-gray-600 via-gray-500 to-gray-600 rounded-lg"></div>
-              {/* Road markings */}
+              
+              {/* Center line */}
               <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-yellow-400 opacity-80"></div>
+              
               {/* Road edges */}
               <div className="absolute left-0 top-0 w-1 h-full bg-white opacity-60"></div>
               <div className="absolute right-0 top-0 w-1 h-full bg-white opacity-60"></div>
@@ -241,7 +243,7 @@ const About = () => {
                 >
                   <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
                     <div className="bg-white rounded-xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                      <div className="text-2xl font-bold text-sahibinden-red mb-2">
+                      <div className="text-2xl font-bold text-orange-600 mb-2">
                         {milestone.year}
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -253,11 +255,13 @@ const About = () => {
                     </div>
                   </div>
                   
-                  {/* Car Icon */}
-                  <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-12 h-8 flex items-center justify-center">
-                    <svg className="w-8 h-6 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5m-11 0a1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5M18.92 6c-.2-.58-.76-1-1.42-1H6.5c-.66 0-1.22.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8l-2.08-6z"/>
-                    </svg>
+                  {/* Grader Icon */}
+                  <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-20 h-12 flex items-center justify-center">
+                    <img 
+                      src="/rsm/grader-icon.png" 
+                      alt="Grader Icon" 
+                      className="w-16 h-10 object-contain drop-shadow-lg"
+                    />
                   </div>
                   
                   <div className="w-1/2"></div>
@@ -276,7 +280,7 @@ const About = () => {
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The passionate individuals behind CarMarket's success
+              The passionate individuals behind GraderMarket's success
             </p>
           </div>
 
@@ -315,12 +319,12 @@ const About = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="philosophy-content">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-              "Design that moves you."
+              "Power that builds the future."
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              Our philosophy centers on the belief that every vehicle should be more than just 
-              transportation—it should be an expression of your personality, your aspirations, 
-              and your commitment to excellence.
+              Our philosophy centers on the belief that every grader should be more than just 
+              construction equipment—it should be an expression of your commitment to quality, 
+              your dedication to progress, and your vision for building tomorrow.
             </p>
           </div>
         </div>

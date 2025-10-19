@@ -1,27 +1,99 @@
-import CarCard from '../components/CarCard';
+import GraderCard from '../components/GraderCard';
 import { useAppStore } from '../store';
+import { FiHeart, FiX } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
-  const { cars, favorites } = useAppStore();
+  const navigate = useNavigate();
+  const { graders, parts, favorites, toggleFavorite } = useAppStore();
 
-  const favoriteCars = cars.filter(car => favorites.includes(car.id));
+  // Favorilerdeki graders ve parts'ları ayır
+  const favoriteGraders = graders.filter(grader => favorites.includes(grader.id));
+  const favoriteParts = parts.filter(part => favorites.includes(part.id));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Favori İlanlarım
+          Favori Ürünlerim
         </h1>
         <p className="text-gray-600">
-          {favoriteCars.length} favori ilanınız var
+          {favoriteGraders.length + favoriteParts.length} favori ürününüz var
         </p>
       </div>
 
-      {favoriteCars.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {favoriteCars.map(car => (
-            <CarCard key={car.id} car={car} />
-          ))}
+      {(favoriteGraders.length > 0 || favoriteParts.length > 0) ? (
+        <div className="space-y-8">
+          {/* Favori Graders */}
+          {favoriteGraders.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Favori Graderlar ({favoriteGraders.length})
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {favoriteGraders.map(grader => (
+                  <GraderCard key={grader.id} grader={grader} viewMode="grid" />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Favori Parts */}
+          {favoriteParts.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                Favori Parçalar ({favoriteParts.length})
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {favoriteParts.map(part => (
+                  <div 
+                    key={part.id} 
+                    onClick={() => navigate(`/part/${part.id}`)}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 relative cursor-pointer"
+                  >
+                    {/* Remove from favorites button */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(part.id);
+                      }}
+                      className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+                      title="Favorilerden çıkar"
+                    >
+                      <FiX className="w-4 h-4 text-red-600" />
+                    </button>
+                    
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={part.images[0]}
+                        alt={part.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-6 overflow-hidden">
+                      <h3 className="text-lg font-bold text-gray-900 mb-1 break-words">
+                        {part.title}
+                      </h3>
+                      <p className="text-orange-600 font-bold text-xl mb-2">
+                        ₺{part.price.toLocaleString()}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                          {part.brand}
+                        </span>
+                        <span className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                          {part.category}
+                        </span>
+                      </div>
+                      <p className="text-gray-600 text-sm line-clamp-2 break-words">
+                        {part.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="text-center py-12">
@@ -31,16 +103,16 @@ const Favorites = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">
-            Henüz favori ilan yok
+            Henüz favori ürün yok
           </h3>
           <p className="text-gray-600 mb-6">
-            Beğendiğiniz araçları favorilere ekleyerek burada görüntüleyebilirsiniz
+            Beğendiğiniz grader ve parçaları favorilere ekleyerek burada görüntüleyebilirsiniz
           </p>
           <a
             href="/"
             className="btn-primary"
           >
-            Araçları Keşfet
+            Ürünleri Keşfet
           </a>
         </div>
       )}
