@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Supabase konfigürasyonu - sabit değerler (environment variables sorunu nedeniyle)
-const supabaseUrl = 'https://kmivaldjqtuzbeokzjsv.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttaXZhbGRqcXR1emJlb2t6anN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3NDUzNjMsImV4cCI6MjA3NjMyMTM2M30.b2RJt_i6DLX_YbVYkusoUY50feWEMpP-u11TNxwvyi8'
+// Supabase konfigürasyonu - environment variables kullanarak
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://kmivaldjqtuzbeokzjsv.supabase.co'
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttaXZhbGRqcXR1emJlb2t6anN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3NDUzNjMsImV4cCI6MjA3NjMyMTM2M30.b2RJt_i6DLX_YbVYkusoUY50feWEMpP-u11TNxwvyi8'
 
 console.log('Supabase URL:', supabaseUrl)
 console.log('Supabase Key:', supabaseAnonKey ? 'Present' : 'Missing')
