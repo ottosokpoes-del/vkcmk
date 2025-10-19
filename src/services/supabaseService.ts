@@ -15,25 +15,6 @@ export interface CarFilters {
   maxYear?: number
   isFeatured?: boolean
   isSold?: boolean
-}
-
-import { supabase, Database } from '../config/supabase'
-
-type Car = Database['public']['Tables']['cars']['Row']
-type CarInsert = Database['public']['Tables']['cars']['Insert']
-type CarUpdate = Database['public']['Tables']['cars']['Update']
-type Favorite = Database['public']['Tables']['favorites']['Row']
-
-export interface CarFilters {
-  brand?: string
-  minPrice?: number
-  maxPrice?: number
-  fuelType?: string
-  transmission?: string
-  minYear?: number
-  maxYear?: number
-  isFeatured?: boolean
-  isSold?: boolean
   search?: string
   limit?: number
   offset?: number

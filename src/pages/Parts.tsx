@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FilterSidebar from '../components/FilterSidebar';
 import Footer from '../components/Footer';
 import { useAppStore } from '../store';
-import { Part } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 

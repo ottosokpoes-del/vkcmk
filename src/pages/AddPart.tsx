@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiSave, FiX } from 'react-icons/fi';
 import { useAppStore } from '../store';
 import { Part } from '../types';
-import { InputValidator, SecurityUtils } from '../utils/security';
+import { SecurityUtils } from '../utils/security';
 
 const AddPart = () => {
   const navigate = useNavigate();
@@ -104,7 +104,9 @@ const AddPart = () => {
         specifications: sanitizedFormData.specifications,
         isNew: formData.isNew,
         isSold: formData.isSold,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        listingDate: new Date().toISOString(),
+        stockCountry: formData.stockCountry
       };
 
       // Simulate API call delay

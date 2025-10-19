@@ -71,12 +71,12 @@ const Navbar = () => {
         ...parts.map(part => ({ ...part, type: 'part' }))
       ].filter(item => {
         // Exact part number match gets highest priority
-        if (item.type === 'part' && item.partNumber?.toLowerCase() === queryLower) {
+        if (item.type === 'part' && (item as any).partNumber?.toLowerCase() === queryLower) {
           return true;
         }
         
         // Partial part number match
-        if (item.type === 'part' && item.partNumber?.toLowerCase().includes(queryLower)) {
+        if (item.type === 'part' && (item as any).partNumber?.toLowerCase().includes(queryLower)) {
           return true;
         }
         
@@ -91,12 +91,12 @@ const Navbar = () => {
         }
         
         // Model match (for graders)
-        if (item.type === 'grader' && item.model?.toLowerCase().includes(queryLower)) {
+        if (item.type === 'grader' && (item as any).model?.toLowerCase().includes(queryLower)) {
           return true;
         }
         
         // Category match (for parts)
-        if (item.type === 'part' && item.category?.toLowerCase().includes(queryLower)) {
+        if (item.type === 'part' && (item as any).category?.toLowerCase().includes(queryLower)) {
           return true;
         }
         
@@ -108,15 +108,15 @@ const Navbar = () => {
         return false;
       }).sort((a, b) => {
         // Sort by relevance: exact part number matches first, then partial matches
-        const aIsExactPartNumber = a.type === 'part' && a.partNumber?.toLowerCase() === queryLower;
-        const bIsExactPartNumber = b.type === 'part' && b.partNumber?.toLowerCase() === queryLower;
+        const aIsExactPartNumber = a.type === 'part' && (a as any).partNumber?.toLowerCase() === queryLower;
+        const bIsExactPartNumber = b.type === 'part' && (b as any).partNumber?.toLowerCase() === queryLower;
         
         if (aIsExactPartNumber && !bIsExactPartNumber) return -1;
         if (!aIsExactPartNumber && bIsExactPartNumber) return 1;
         
         // Then partial part number matches
-        const aIsPartialPartNumber = a.type === 'part' && a.partNumber?.toLowerCase().includes(queryLower);
-        const bIsPartialPartNumber = b.type === 'part' && b.partNumber?.toLowerCase().includes(queryLower);
+        const aIsPartialPartNumber = a.type === 'part' && (a as any).partNumber?.toLowerCase().includes(queryLower);
+        const bIsPartialPartNumber = b.type === 'part' && (b as any).partNumber?.toLowerCase().includes(queryLower);
         
         if (aIsPartialPartNumber && !bIsPartialPartNumber) return -1;
         if (!aIsPartialPartNumber && bIsPartialPartNumber) return 1;

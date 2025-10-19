@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiSave, FiX } from 'react-icons/fi';
 import { useAppStore } from '../store';
 import { Grader } from '../types';
-import { InputValidator, SecurityUtils } from '../utils/security';
+import { SecurityUtils } from '../utils/security';
 
 const AddGrader = () => {
   const navigate = useNavigate();
@@ -129,7 +129,9 @@ const AddGrader = () => {
         safety: sanitizedFormData.safety,
         isNew: formData.isNew,
         isSold: formData.isSold,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        listingDate: new Date().toISOString(),
+        stockCountry: formData.stockCountry
       };
 
       // Simulate API call delay
@@ -407,7 +409,7 @@ const AddGrader = () => {
                 </label>
                 <select
                   value={formData.transmission}
-                  onChange={(e) => setFormData(prev => ({ ...prev, transmission: e.target.value as Car['transmission'] }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, transmission: e.target.value as Grader['transmission'] }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                 >
                   <option value="Manuel">Manuel</option>
@@ -438,7 +440,7 @@ const AddGrader = () => {
                 </label>
                 <select
                   value={formData.sellerType}
-                  onChange={(e) => setFormData(prev => ({ ...prev, sellerType: e.target.value as Car['sellerType'] }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, sellerType: e.target.value as Grader['sellerType'] }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                 >
                   <option value="Sahibinden">Sahibinden</option>

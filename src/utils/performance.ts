@@ -86,7 +86,7 @@ export class PerformanceMonitor {
         const entries = list.getEntries();
         entries.forEach(entry => {
           if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+            clsValue += (entry as any).value;
           }
         });
         this.metrics.cls = clsValue;

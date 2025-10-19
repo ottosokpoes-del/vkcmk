@@ -30,7 +30,8 @@ const EditGrader = () => {
     },
     features: [''],
     safety: [''],
-    isNew: false
+    isNew: false,
+    isSold: false
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -72,7 +73,8 @@ const EditGrader = () => {
         },
         features: grader.features && grader.features.length > 0 ? grader.features : [''],
         safety: grader.safety && grader.safety.length > 0 ? grader.safety : [''],
-        isNew: grader.isNew || false
+        isNew: grader.isNew || false,
+        isSold: grader.isSold || false
       });
     }
   }, [grader]);
@@ -104,7 +106,8 @@ const EditGrader = () => {
     if (!validateForm()) return;
 
     const updatedGrader: Grader = {
-      ...grader,
+      ...grader!,
+      id: grader!.id, // Ensure id is defined
       title: formData.title.trim(),
       price: Number(formData.price),
       year: Number(formData.year),
@@ -118,7 +121,8 @@ const EditGrader = () => {
       technicalSpecs: formData.technicalSpecs,
       features: formData.features.filter(f => f.trim() !== ''),
       safety: formData.safety.filter(s => s.trim() !== ''),
-      isNew: formData.isNew
+      isNew: formData.isNew,
+      isSold: formData.isSold
     };
 
     if (id) {
@@ -334,7 +338,7 @@ const EditGrader = () => {
                 </label>
                 <select
                   value={formData.transmission}
-                  onChange={(e) => setFormData(prev => ({ ...prev, transmission: e.target.value as Car['transmission'] }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, transmission: e.target.value as Grader['transmission'] }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                 >
                   <option value="Manuel">Manuel</option>
@@ -365,7 +369,7 @@ const EditGrader = () => {
                 </label>
                 <select
                   value={formData.sellerType}
-                  onChange={(e) => setFormData(prev => ({ ...prev, sellerType: e.target.value as Car['sellerType'] }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, sellerType: e.target.value as Grader['sellerType'] }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                 >
                   <option value="Sahibinden">Sahibinden</option>

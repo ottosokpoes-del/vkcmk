@@ -65,7 +65,6 @@ export const FastLink: React.FC<FastLinkProps> = ({
 
 // Navigation component with fast links
 export const FastNavigation: React.FC = () => {
-  const location = useLocation();
 
   // Preload critical pages on mount
   useEffect(() => {

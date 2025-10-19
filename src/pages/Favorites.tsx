@@ -1,6 +1,6 @@
-import GraderCard from '../components/GraderCard';
+import CarCard from '../components/CarCard';
 import { useAppStore } from '../store';
-import { FiHeart, FiX } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
@@ -32,7 +32,7 @@ const Favorites = () => {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {favoriteGraders.map(grader => (
-                  <GraderCard key={grader.id} grader={grader} viewMode="grid" />
+                  <CarCard key={grader.id} grader={grader} />
                 ))}
               </div>
             </div>

@@ -82,11 +82,11 @@ export class AnalyticsManager {
     document.head.appendChild(script);
 
     // Initialize gtag
-    window.dataLayer = window.dataLayer || [];
+    (window as any).dataLayer = (window as any).dataLayer || [];
     function gtag(...args: any[]) {
-      window.dataLayer.push(args);
+      (window as any).dataLayer.push(args);
     }
-    window.gtag = gtag;
+    (window as any).gtag = gtag;
 
     gtag('js', new Date());
     gtag('config', this.config.googleAnalytics.measurementId, {
@@ -154,7 +154,7 @@ export class AnalyticsManager {
         const entries = list.getEntries();
         entries.forEach(entry => {
           if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+            clsValue += (entry as any).value;
           }
         });
         this.trackEvent('performance', 'cls', clsValue);
@@ -211,7 +211,7 @@ export class AnalyticsManager {
       } catch (error) {
         this.trackEvent('error', 'fetch_error', {
           url: args[0],
-          error: error.message
+          error: (error as Error).message
         });
         throw error;
       }
@@ -222,7 +222,7 @@ export class AnalyticsManager {
   trackPageView(page?: string): void {
     const pagePath = page || window.location.pathname;
     
-    if (window.gtag) {
+    if ((window as any).gtag) {
       gtag('config', this.config.googleAnalytics?.measurementId, {
         page_path: pagePath,
         page_title: document.title
@@ -240,7 +240,7 @@ export class AnalyticsManager {
   }
 
   trackEvent(category: string, action: string, value?: any): void {
-    if (window.gtag) {
+    if ((window as any).gtag) {
       gtag('event', action, {
         event_category: category,
         event_label: typeof value === 'object' ? JSON.stringify(value) : value,

@@ -111,6 +111,7 @@ export interface AppState {
   filters: FilterState;
   isLoading: boolean;
   homepageSlider: HomepageSliderItem[];
+  favorites: string[];
 }
 
 export interface AppActions {
@@ -131,4 +132,5 @@ export interface AppActions {
   updateHomepageSliderItem: (item: HomepageSliderItem) => void;
   deleteHomepageSliderItem: (id: string) => void;
   saveHomepageSlider: () => void;
+  toggleFavorite: (id: string) => void;
 }

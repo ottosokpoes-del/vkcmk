@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { FiGrid, FiList, FiFilter, FiSearch, FiChevronDown, FiMapPin, FiCalendar, FiStar } from 'react-icons/fi';
+import { FiGrid, FiList, FiFilter, FiChevronDown, FiMapPin, FiCalendar, FiStar } from 'react-icons/fi';
 import { useAppStore } from '../store';
 import { SEO, SEOConfigs } from '../components/SEO';
 
@@ -29,7 +29,7 @@ const Gallery = () => {
 
     // Brand filter
     if (filters.brand.length > 0) {
-      filtered = filtered.filter(grader => filters.brand.includes(grader.brand));
+      filtered = filtered.filter(grader => filters.brand.includes(grader.brand || ''));
     }
 
     // Price filter

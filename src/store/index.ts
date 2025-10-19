@@ -37,6 +37,7 @@ const mockGraders: Grader[] = [
     features: ['Klima', 'ABS', 'ESP'],
     safety: ['ABS', 'ESP'],
     isNew: true,
+    isSold: false,
     createdAt: new Date().toISOString(),
     listingDate: new Date().toISOString(),
     stockCountry: 'EU',
@@ -237,13 +238,14 @@ const mockHomepageSlider: HomepageSliderItem[] = [
 
 export const useAppStore = create<AppState & AppActions>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       graders: [...mockGraders], // Force new array
       parts: [...mockParts],     // Force new array
       user: null,
       filters: defaultFilters,
       isLoading: false,
       homepageSlider: [...mockHomepageSlider],
+      favorites: [],
       // Cache for filtered results
       _filteredGradersCache: new Map(),
 
@@ -313,6 +315,12 @@ export const useAppStore = create<AppState & AppActions>()(
           homepageSlider: updatedSlider
         };
       }),
+
+      toggleFavorite: (id) => set((state) => ({
+        favorites: state.favorites.includes(id)
+          ? state.favorites.filter(favId => favId !== id)
+          : [...state.favorites, id]
+      })),
     }),
     {
       name: 'grader-marketplace-storage-v16',

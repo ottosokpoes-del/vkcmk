@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiSave, FiX } from 'react-icons/fi';
 import { useAppStore } from '../store';
 import { Part } from '../types';
-import { InputValidator, SecurityUtils } from '../utils/security';
+import { SecurityUtils } from '../utils/security';
 
 const EditPart = () => {
   const { id } = useParams<{ id: string }>();

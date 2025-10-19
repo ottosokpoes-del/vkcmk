@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { FiSearch, FiGrid, FiList, FiFilter, FiX } from 'react-icons/fi';
 import { useAppStore } from '../store';
@@ -35,7 +35,7 @@ const SearchResults = () => {
     }
 
     // Brand filter
-    if (filters.brand.length > 0 && !filters.brand.includes(grader.brand)) {
+    if (filters.brand.length > 0 && !filters.brand.includes(grader.brand || '')) {
       return false;
     }
 
@@ -73,7 +73,7 @@ const SearchResults = () => {
     }
 
     // Brand filter
-    if (filters.brand.length > 0 && !filters.brand.includes(part.brand)) {
+    if (filters.brand.length > 0 && !filters.brand.includes(part.brand || '')) {
       return false;
     }
 

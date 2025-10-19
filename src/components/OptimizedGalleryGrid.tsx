@@ -117,7 +117,7 @@ export const OptimizedGalleryGrid: React.FC<OptimizedGalleryGridProps> = ({
         items={graders}
         itemHeight={200}
         containerHeight={800}
-        renderItem={(grader, index) => (
+        renderItem={(grader) => (
           <GraderCard key={grader.id} grader={grader} viewMode="list" />
         )}
         className="space-y-4"

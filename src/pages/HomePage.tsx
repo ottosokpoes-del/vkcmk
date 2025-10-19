@@ -8,7 +8,7 @@ const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [currentX, setCurrentX] = useState(0);
+  const [, setCurrentX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
 
   useEffect(() => {
@@ -208,7 +208,7 @@ const HomePage = () => {
                     transition: isDragging ? 'none' : 'transform 0.3s ease-out'
                   }}
                 >
-                  {displaySliderItems.map((item, index) => {
+                  {displaySliderItems.map((item) => {
                     return (
                       <div key={item.id} className="w-full flex-shrink-0">
                         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -248,15 +248,15 @@ const HomePage = () => {
                                   <>
                                     <div className="flex items-center">
                                       <span className="font-semibold text-gray-700 w-24">Model:</span>
-                                      <span className="text-gray-900">{item.data.model}</span>
+                                      <span className="text-gray-900">{(item.data as any).model}</span>
                                     </div>
                                     <div className="flex items-center">
                                       <span className="font-semibold text-gray-700 w-24">Yıl:</span>
-                                      <span className="text-gray-900">{item.data.year}</span>
+                                      <span className="text-gray-900">{(item.data as any).year}</span>
                                     </div>
                                     <div className="flex items-center">
                                       <span className="font-semibold text-gray-700 w-24">Saat:</span>
-                                      <span className="text-gray-900">{item.data.hours?.toLocaleString()} saat</span>
+                                      <span className="text-gray-900">{(item.data as any).hours?.toLocaleString()} saat</span>
                                     </div>
                                   </>
                                 )}
@@ -264,11 +264,11 @@ const HomePage = () => {
                                   <>
                                     <div className="flex items-center">
                                       <span className="font-semibold text-gray-700 w-24">Parça No:</span>
-                                      <span className="text-gray-900">{item.data.partNumber}</span>
+                                      <span className="text-gray-900">{(item.data as any).partNumber}</span>
                                     </div>
                                     <div className="flex items-center">
                                       <span className="font-semibold text-gray-700 w-24">Kategori:</span>
-                                      <span className="text-gray-900">{item.data.category}</span>
+                                      <span className="text-gray-900">{(item.data as any).category}</span>
                                     </div>
                                   </>
                                 )}

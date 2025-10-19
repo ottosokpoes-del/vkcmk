@@ -194,10 +194,10 @@ const AdvancedChatBot = () => {
       const filteredGraders = graders.filter(grader => {
         const searchTerm = query.toLowerCase();
         return (
-          grader.brand.toLowerCase().includes(searchTerm) ||
-          grader.model.toLowerCase().includes(searchTerm) ||
-          grader.description.toLowerCase().includes(searchTerm) ||
-          grader.title.toLowerCase().includes(searchTerm)
+          grader.brand?.toLowerCase().includes(searchTerm) ||
+          grader.model?.toLowerCase().includes(searchTerm) ||
+          grader.description?.toLowerCase().includes(searchTerm) ||
+          grader.title?.toLowerCase().includes(searchTerm)
         );
       });
 

@@ -822,8 +822,8 @@ const AdminDashboard = () => {
                           <h4 className="font-medium text-gray-900 truncate">{product.title}</h4>
                           <p className="text-sm text-gray-600">
                             {selectedProductType === 'grader' 
-                              ? `${product.year} • ${product.brand}` 
-                              : `${product.brand} • ${product.category}`
+                              ? `${(product as any).year} • ${product.brand}` 
+                              : `${product.brand} • ${(product as any).category}`
                             }
                           </p>
                           <p className="text-sm font-semibold text-orange-600">

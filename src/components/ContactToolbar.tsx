@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import { FiPhone, FiMail } from 'react-icons/fi';
 import { FaWhatsapp, FaFacebookMessenger } from 'react-icons/fa';
 
 const ContactToolbar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const contactItems = [
     {
