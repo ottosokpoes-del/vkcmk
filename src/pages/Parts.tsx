@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FiFilter, FiGrid, FiList } from 'react-icons/fi';
+import { FiGrid, FiList } from 'react-icons/fi';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,7 +14,6 @@ const Parts = () => {
   const [searchParams] = useSearchParams();
   const { graders, parts, filters } = useAppStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [showFilters, setShowFilters] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const searchQuery = searchParams.get('search') || '';
@@ -124,17 +123,7 @@ const Parts = () => {
           {/* Content */}
           <div className="flex-1">
             {/* Toolbar */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden flex items-center space-x-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <FiFilter className="w-4 h-4" />
-                  <span>Filtreler</span>
-                </button>
-              </div>
-
+            <div className="flex items-center justify-end mb-6">
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setViewMode('grid')}

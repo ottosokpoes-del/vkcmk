@@ -53,7 +53,7 @@ const FilterSidebar = () => {
       {/* Mobile Filter Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed bottom-6 right-6 bg-orange-600 text-white p-3 rounded-full shadow-lg z-40"
+        className="lg:hidden fixed bottom-6 right-6 bg-orange-600 text-white p-3 rounded-full shadow-lg z-40 hover:bg-orange-700 transition-colors"
       >
         <FiFilter className="w-6 h-6" />
       </button>
@@ -61,14 +61,14 @@ const FilterSidebar = () => {
       {/* Overlay */}
       {isOpen && (
         <div 
-          className="md:hidden fixed inset-0 bg-black/50 z-50"
+          className="lg:hidden fixed inset-0 bg-black/50 z-50"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`fixed md:static top-0 right-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
-        isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
+      <div className={`fixed lg:static top-0 right-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
       }`}>
         <div className="p-6 h-full overflow-y-auto">
           {/* Header */}
@@ -76,7 +76,7 @@ const FilterSidebar = () => {
             <h2 className="text-xl font-bold text-gray-900">Filtreler</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="md:hidden p-2 hover:bg-gray-100 rounded-full"
+              className="lg:hidden p-2 hover:bg-gray-100 rounded-full"
             >
               <FiX className="w-5 h-5" />
             </button>
