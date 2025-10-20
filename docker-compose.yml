@@ -4,62 +4,66 @@ services:
   # MySQL Database
   mysql:
     image: mysql:8.0
-    container_name: grader_mysql
+    container_name: qqe_mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: QqeRoot2025!
       MYSQL_DATABASE: grader_marketplace
-      MYSQL_USER: grader_user
-      MYSQL_PASSWORD: grader_password
+      MYSQL_USER: qqe_user
+      MYSQL_PASSWORD: QqeApp2025!
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./database/simple_schema.sql:/docker-entrypoint-initdb.d/schema.sql
     networks:
-      - grader_network
+      - qqe_network
+    restart: unless-stopped
 
   # Backend API
   backend:
     build: ./server
-    container_name: grader_backend
+    container_name: qqe_backend
     environment:
       DB_HOST: mysql
-      DB_USER: grader_user
-      DB_PASSWORD: grader_password
+      DB_USER: qqe_user
+      DB_PASSWORD: QqeApp2025!
       DB_NAME: grader_marketplace
       DB_PORT: 3306
-      JWT_SECRET: docker-jwt-secret-key-2024
+      JWT_SECRET: QqeJWTSecret2025!
+      SESSION_SECRET: QqeSessionSecret2025!
+      COOKIE_SECRET: QqeCookieSecret2025!
       NODE_ENV: production
       PORT: 3000
-      FRONTEND_URL: http://localhost:5173
+      FRONTEND_URL: http://localhost:80
     ports:
       - "3000:3000"
     depends_on:
       - mysql
     networks:
-      - grader_network
+      - qqe_network
     volumes:
       - ./server/uploads:/app/uploads
+    restart: unless-stopped
 
-  # Frontend (Development)
+  # Frontend (Production Build)
   frontend:
-    build: .
-    container_name: grader_frontend
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: qqe_frontend
     environment:
       VITE_API_URL: http://localhost:3000/api
     ports:
-      - "5173:5173"
+      - "80:80"
     depends_on:
       - backend
     networks:
-      - grader_network
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - qqe_network
+    restart: unless-stopped
 
 volumes:
   mysql_data:
 
 networks:
-  grader_network:
+  qqe_network:
     driver: bridge
