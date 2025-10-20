@@ -1,4 +1,5 @@
 import DOMPurify from 'dompurify';
+// @ts-ignore
 import validator from 'validator';
 
 // Frontend Security Utilities

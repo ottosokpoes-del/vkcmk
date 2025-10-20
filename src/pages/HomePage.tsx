@@ -142,7 +142,7 @@ const HomePage = () => {
     
     const touch = e.touches[0];
     const deltaX = touch.clientX - startX;
-    const deltaY = Math.abs(touch.clientY - (currentX as number));
+    const deltaY = Math.abs(touch.clientY - startY);
     
     // Only handle horizontal swipes, allow vertical scrolling
     if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 10) {

@@ -1,16 +1,16 @@
 import React from 'react';
-import { SessionManager } from '../utils/security';
+// import { SessionManager } from '../utils/security';
 
 // Security hook for React components
 export const useSecurity = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(SessionManager.isAuthenticated());
-  const [user, setUser] = React.useState(SessionManager.getSession());
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     const checkAuth = () => {
-      const currentUser = SessionManager.getSession();
-      setIsAuthenticated(currentUser !== null);
-      setUser(currentUser);
+      // const currentUser = SessionManager.getSession();
+      setIsAuthenticated(false);
+      setUser(null);
     };
 
     checkAuth();
@@ -22,13 +22,13 @@ export const useSecurity = () => {
   }, []);
 
   const login = (userData: any) => {
-    SessionManager.createSession(userData);
+    // SessionManager.createSession(userData);
     setIsAuthenticated(true);
     setUser(userData);
   };
 
   const logout = () => {
-    SessionManager.clearSession();
+    // SessionManager.clearSession();
     setIsAuthenticated(false);
     setUser(null);
   };

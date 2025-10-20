@@ -92,7 +92,7 @@ const Navbar = () => {
     if (stockFilter === 'low') {
       filtered = filtered.filter(item => item.type !== 'part' || (item as any).stockQuantity <= 5);
     } else if (stockFilter === 'out') {
-      filtered = filtered.filter(item => item.type !== 'part' || (item as any).stockQuantity === 0);
+      filtered = filtered.filter(item => item.type !== 'part' || (item as any).stockQuantity > 0);
     }
 
     // Marka filtresi
@@ -102,7 +102,7 @@ const Navbar = () => {
 
     // Ülke filtresi (sadece parçalar için)
     if (countryFilter.length > 0) {
-      filtered = filtered.filter(item => item.type !== 'part' || brandFilter.includes((item as any).stockCountry));
+      filtered = filtered.filter(item => item.type !== 'part' || countryFilter.includes((item as any).stockCountry));
     }
 
     return filtered;
@@ -619,13 +619,13 @@ const Navbar = () => {
                             key={brand}
                             onClick={() => {
                               setBrandFilter(prev => 
-                                prev.includes(brand) 
+                                prev.includes(brand || '') 
                                   ? prev.filter(b => b !== brand)
-                                  : [...prev, brand]
+                                  : [...prev, brand || '']
                               );
                             }}
                             className={`px-3 py-2 text-sm rounded-lg transition-colors ${
-                              brandFilter.includes(brand)
+                              brandFilter.includes(brand || '')
                                 ? 'bg-orange-600 text-white'
                                 : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
                             }`}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiMapPin, FiInfo, FiTruck, FiPackage, FiX, FiFlag } from 'react-icons/fi';
+import { FiMapPin, FiTruck, FiX } from 'react-icons/fi';
 
 interface SalesLocation {
   id: string;
