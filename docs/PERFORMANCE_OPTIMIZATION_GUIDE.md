@@ -98,7 +98,6 @@ build: {
       manualChunks: {
         vendor: ['react', 'react-dom'],
         router: ['react-router-dom'],
-        supabase: ['@supabase/supabase-js'],
         ui: ['react-icons', 'swiper'],
         utils: ['zustand', 'crypto-js']
       }
@@ -162,18 +161,9 @@ npm install react-helmet-async
 ```bash
 # .env.local
 REACT_APP_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-REACT_APP_CLOUDFLARE_TOKEN=your_token
-REACT_APP_SUPABASE_URL=your_supabase_url
-REACT_APP_SUPABASE_ANON_KEY=your_supabase_key
 ```
 
-### 3. Cloudflare Kurulumu
-1. Domain'i Cloudflare'e ekleyin
-2. DNS ayarlarını yapılandırın
-3. Page Rules'ları uygulayın
-4. Workers'ı deploy edin
-
-### 4. Analytics Kurulumu
+### 3. Analytics Kurulumu
 ```typescript
 // src/main.tsx
 import { AnalyticsManager, defaultAnalyticsConfig } from './utils/analytics';
@@ -253,11 +243,8 @@ const score = getScore(); // 0-100 performance score
 
 #### 1. Cache Issues
 ```bash
-# Clear Cloudflare cache
-curl -X POST "https://api.cloudflare.com/client/v4/zones/{zone_id}/purge_cache" \
-  -H "Authorization: Bearer {api_token}" \
-  -H "Content-Type: application/json" \
-  --data '{"purge_everything":true}'
+# Clear browser cache
+# Ctrl+Shift+R (Windows/Linux) or Cmd+Shift+R (Mac)
 ```
 
 #### 2. Service Worker Issues

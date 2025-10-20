@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FilterSidebar from '../components/FilterSidebar';
 import Footer from '../components/Footer';
 import { useAppStore } from '../store';
+import { apiService } from '../services/apiService';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,6 +84,20 @@ const Parts = () => {
         { y: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: "power2.out" }
       );
     }
+  }, []);
+
+  // Ensure parts hydrate from backend when visiting parts page directly
+  useEffect(() => {
+    const hydrate = async () => {
+      try {
+        const remoteParts = await apiService.getParts({ limit: 100 });
+        // @ts-ignore setParts exists
+        (useAppStore.getState().setParts as any)(remoteParts);
+      } catch (e) {
+        // ignore, fallback to current state
+      }
+    };
+    hydrate();
   }, []);
 
   return (
@@ -203,6 +218,15 @@ const Parts = () => {
                                 Yeni
                               </span>
                             )}
+                            <div>
+                              <span className={`text-xs px-2 py-1 rounded-lg font-medium ${
+                                part.stockQuantity > 0 
+                                  ? 'bg-blue-100 text-blue-800' 
+                                  : 'bg-red-100 text-red-800'
+                              }`}>
+                                Stok: {part.stockQuantity}
+                              </span>
+                            </div>
                             <div>
                               <span className={`text-sm px-3 py-2 rounded-lg font-bold shadow-md ${
                                 part.isSold 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiSave, FiX } from 'react-icons/fi';
 import { useAppStore } from '../store';
+import { apiService } from '../services/apiService';
 import { Part } from '../types';
 import { SecurityUtils } from '../utils/security';
 
@@ -24,6 +25,7 @@ const AddPart = () => {
       weight: '',
       warranty: ''
     },
+    stockQuantity: '',
     isNew: true,
     isSold: false,
     listingDate: new Date().toISOString().split('T')[0], // Bugünün tarihi
@@ -55,6 +57,9 @@ const AddPart = () => {
     }
     if (!formData.partNumber.trim()) {
       newErrors.partNumber = 'Parça numarası gereklidir';
+    }
+    if (!formData.stockQuantity || isNaN(Number(formData.stockQuantity)) || Number(formData.stockQuantity) < 0) {
+      newErrors.stockQuantity = 'Geçerli bir stok miktarı giriniz (0 veya daha büyük)';
     }
     if (!formData.description.trim()) {
       newErrors.description = 'Açıklama gereklidir';
@@ -102,6 +107,7 @@ const AddPart = () => {
         description: sanitizedFormData.description,
         images: sanitizedFormData.images,
         specifications: sanitizedFormData.specifications,
+        stockQuantity: Number(formData.stockQuantity),
         isNew: formData.isNew,
         isSold: formData.isSold,
         createdAt: new Date().toISOString(),
@@ -109,10 +115,25 @@ const AddPart = () => {
         stockCountry: formData.stockCountry
       };
 
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Create via real backend
+      const response = await apiService.createPart({
+        title: newPart.title,
+        brand: newPart.brand,
+        category: newPart.category,
+        price: newPart.price,
+        partNumber: newPart.partNumber,
+        compatibleModels: newPart.compatibleModels,
+        images: newPart.images,
+        description: newPart.description,
+        specifications: newPart.specifications,
+        isNew: newPart.isNew,
+        isSold: newPart.isSold,
+        stockQuantity: newPart.stockQuantity,
+        listingDate: newPart.listingDate,
+        stockCountry: newPart.stockCountry,
+      });
 
-      addPart(newPart);
+      addPart({ ...newPart, id: response.id });
       navigate('/admin');
     } catch (error) {
       console.error('Error adding part:', error);
@@ -325,6 +346,23 @@ const AddPart = () => {
                   placeholder="1R-0742"
                 />
                 {errors.partNumber && <p className="text-red-500 text-sm mt-1">{errors.partNumber}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Stok Miktarı *
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  value={formData.stockQuantity}
+                  onChange={(e) => setFormData(prev => ({ ...prev, stockQuantity: e.target.value }))}
+                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent ${
+                    errors.stockQuantity ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="15"
+                />
+                {errors.stockQuantity && <p className="text-red-500 text-sm mt-1">{errors.stockQuantity}</p>}
               </div>
 
               <div>
