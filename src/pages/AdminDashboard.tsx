@@ -689,21 +689,21 @@ const AdminDashboard = () => {
                           <img
                             className="h-12 w-16 rounded object-cover"
                             src={grader.images[0]}
-                            alt={SecurityUtils.sanitizeHtml(grader.title)}
+                            alt={SecurityUtils.sanitizeHTML(grader.title)}
                           />
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {SecurityUtils.sanitizeHtml(grader.title)}
+                            {SecurityUtils.sanitizeHTML(grader.title)}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {SecurityUtils.sanitizeHtml(grader.location)}
+                            {SecurityUtils.sanitizeHTML(grader.location)}
                             {grader.model && (
                               <span className="ml-2 text-orange-600 font-medium">
                                 <span 
                                   dangerouslySetInnerHTML={{
                                     __html: highlightSearchTerm(
-                                      SecurityUtils.sanitizeHtml(grader.model || ''), 
+                                      SecurityUtils.sanitizeHTML(grader.model || ''), 
                                       searchQuery
                                     )
                                   }}
@@ -719,20 +719,20 @@ const AdminDashboard = () => {
                         <div className="space-y-2">
                           <div>
                             <span className="font-semibold">Marka:</span>
-                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHtml(grader.brand || '')}</span>
+                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHTML(grader.brand || '')}</span>
                           </div>
                           <div>
                             <span className="font-semibold">Model:</span>
-                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHtml(grader.model || '')}</span>
+                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHTML(grader.model || '')}</span>
                           </div>
                           <div>
                             <span className="font-semibold">Lokasyon:</span>
-                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHtml(grader.location)}</span>
+                            <span className="text-gray-300 ml-2">{SecurityUtils.sanitizeHTML(grader.location)}</span>
                           </div>
                           {grader.description && (
                             <div>
                               <span className="font-semibold">Açıklama:</span>
-                              <p className="text-gray-300">{SecurityUtils.sanitizeHtml(grader.description)}</p>
+                              <p className="text-gray-300">{SecurityUtils.sanitizeHTML(grader.description)}</p>
                             </div>
                           )}
                         </div>
@@ -878,18 +878,18 @@ const AdminDashboard = () => {
                           <img
                             className="h-12 w-16 rounded object-cover"
                             src={part.images[0]}
-                            alt={SecurityUtils.sanitizeHtml(part.title)}
+                            alt={SecurityUtils.sanitizeHTML(part.title)}
                           />
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {SecurityUtils.sanitizeHtml(part.title)}
+                            {SecurityUtils.sanitizeHTML(part.title)}
                           </div>
                           <div className="text-sm text-gray-500">
                             <span 
                               dangerouslySetInnerHTML={{
                                 __html: highlightSearchTerm(
-                                  SecurityUtils.sanitizeHtml(part.partNumber), 
+                                  SecurityUtils.sanitizeHTML(part.partNumber), 
                                   searchQuery
                                 )
                               }}
@@ -903,7 +903,7 @@ const AdminDashboard = () => {
                         <div className="space-y-2">
                           <div>
                             <span className="font-semibold">Açıklama:</span>
-                            <p className="text-gray-300">{SecurityUtils.sanitizeHtml(part.description)}</p>
+                            <p className="text-gray-300">{SecurityUtils.sanitizeHTML(part.description)}</p>
                           </div>
                           <div>
                             <span className="font-semibold">Uyumlu Modeller:</span>
@@ -935,10 +935,10 @@ const AdminDashboard = () => {
                       {formatPrice(part.price)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {SecurityUtils.sanitizeHtml(part.brand)}
+                      {SecurityUtils.sanitizeHTML(part.brand)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {SecurityUtils.sanitizeHtml(part.category)}
+                      {SecurityUtils.sanitizeHTML(part.category)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       <div className="flex items-center space-x-1">

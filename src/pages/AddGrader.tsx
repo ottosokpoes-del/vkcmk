@@ -92,22 +92,22 @@ const AddGrader = () => {
       // Sanitize all text inputs
       const sanitizedFormData = {
         ...formData,
-        title: SecurityUtils.sanitizeHtml(formData.title.trim()),
-        brand: SecurityUtils.sanitizeHtml(formData.brand.trim()),
-        model: SecurityUtils.sanitizeHtml(formData.model.trim()),
-        location: SecurityUtils.sanitizeHtml(formData.location.trim()),
-        description: SecurityUtils.sanitizeHtml(formData.description.trim()),
+        title: SecurityUtils.sanitizeHTML(formData.title.trim()),
+        brand: SecurityUtils.sanitizeHTML(formData.brand.trim()),
+        model: SecurityUtils.sanitizeHTML(formData.model.trim()),
+        location: SecurityUtils.sanitizeHTML(formData.location.trim()),
+        description: SecurityUtils.sanitizeHTML(formData.description.trim()),
         technicalSpecs: {
           ...formData.technicalSpecs,
-          engine: SecurityUtils.sanitizeHtml(formData.technicalSpecs.engine),
-          power: SecurityUtils.sanitizeHtml(formData.technicalSpecs.power),
-          torque: SecurityUtils.sanitizeHtml(formData.technicalSpecs.torque),
-          bladeWidth: SecurityUtils.sanitizeHtml(formData.technicalSpecs.bladeWidth),
-          operatingWeight: SecurityUtils.sanitizeHtml(formData.technicalSpecs.operatingWeight),
-          fuelConsumption: SecurityUtils.sanitizeHtml(formData.technicalSpecs.fuelConsumption),
+          engine: SecurityUtils.sanitizeHTML(formData.technicalSpecs.engine),
+          power: SecurityUtils.sanitizeHTML(formData.technicalSpecs.power),
+          torque: SecurityUtils.sanitizeHTML(formData.technicalSpecs.torque),
+          bladeWidth: SecurityUtils.sanitizeHTML(formData.technicalSpecs.bladeWidth),
+          operatingWeight: SecurityUtils.sanitizeHTML(formData.technicalSpecs.operatingWeight),
+          fuelConsumption: SecurityUtils.sanitizeHTML(formData.technicalSpecs.fuelConsumption),
         },
-        features: formData.features.map(f => SecurityUtils.sanitizeHtml(f.trim())).filter(f => f !== ''),
-        safety: formData.safety.map(s => SecurityUtils.sanitizeHtml(s.trim())).filter(s => s !== ''),
+        features: formData.features.map(f => SecurityUtils.sanitizeHTML(f.trim())).filter(f => f !== ''),
+        safety: formData.safety.map(s => SecurityUtils.sanitizeHTML(s.trim())).filter(s => s !== ''),
         images: formData.images.filter(img => img.trim() !== '')
       };
       const newGrader: Grader = {

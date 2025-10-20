@@ -97,7 +97,7 @@ const Navbar = () => {
 
     // Marka filtresi
     if (brandFilter.length > 0) {
-      filtered = filtered.filter(item => brandFilter.includes(item.brand));
+      filtered = filtered.filter(item => brandFilter.includes(item.brand || ''));
     }
 
     // Ülke filtresi (sadece parçalar için)

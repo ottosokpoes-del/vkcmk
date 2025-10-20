@@ -118,19 +118,19 @@ const EditPart = () => {
       // Sanitize all text inputs
       const sanitizedFormData = {
         ...formData,
-        title: SecurityUtils.sanitizeHtml(formData.title.trim()),
-        brand: SecurityUtils.sanitizeHtml(formData.brand.trim()),
-        category: SecurityUtils.sanitizeHtml(formData.category.trim()),
-        partNumber: SecurityUtils.sanitizeHtml(formData.partNumber.trim()),
-        description: SecurityUtils.sanitizeHtml(formData.description.trim()),
+        title: SecurityUtils.sanitizeHTML(formData.title.trim()),
+        brand: SecurityUtils.sanitizeHTML(formData.brand.trim()),
+        category: SecurityUtils.sanitizeHTML(formData.category.trim()),
+        partNumber: SecurityUtils.sanitizeHTML(formData.partNumber.trim()),
+        description: SecurityUtils.sanitizeHTML(formData.description.trim()),
         specifications: {
           ...formData.specifications,
-          material: SecurityUtils.sanitizeHtml(formData.specifications.material),
-          dimensions: SecurityUtils.sanitizeHtml(formData.specifications.dimensions),
-          weight: SecurityUtils.sanitizeHtml(formData.specifications.weight),
-          warranty: SecurityUtils.sanitizeHtml(formData.specifications.warranty),
+          material: SecurityUtils.sanitizeHTML(formData.specifications.material),
+          dimensions: SecurityUtils.sanitizeHTML(formData.specifications.dimensions),
+          weight: SecurityUtils.sanitizeHTML(formData.specifications.weight),
+          warranty: SecurityUtils.sanitizeHTML(formData.specifications.warranty),
         },
-        compatibleModels: formData.compatibleModels.map(m => SecurityUtils.sanitizeHtml(m.trim())).filter(m => m !== ''),
+        compatibleModels: formData.compatibleModels.map(m => SecurityUtils.sanitizeHTML(m.trim())).filter(m => m !== ''),
         images: formData.images.filter(img => img.trim() !== '')
       };
       

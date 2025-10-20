@@ -98,10 +98,10 @@ const PartDetails = () => {
               </button>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  {SecurityUtils.sanitizeHtml(part.title)}
+                  {SecurityUtils.sanitizeHTML(part.title)}
                 </h1>
                 <p className="text-gray-600">
-                  {SecurityUtils.sanitizeHtml(part.brand)} • {SecurityUtils.sanitizeHtml(part.category)}
+                  {SecurityUtils.sanitizeHTML(part.brand)} • {SecurityUtils.sanitizeHTML(part.category)}
                 </p>
               </div>
             </div>
@@ -124,7 +124,7 @@ const PartDetails = () => {
             <div className="aspect-square overflow-hidden rounded-xl bg-gray-100">
               <img
                 src={part.images[currentImageIndex]}
-                alt={SecurityUtils.sanitizeHtml(part.title)}
+                alt={SecurityUtils.sanitizeHTML(part.title)}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -143,7 +143,7 @@ const PartDetails = () => {
                   >
                     <img
                       src={image}
-                      alt={`${SecurityUtils.sanitizeHtml(part.title)} ${index + 1}`}
+                      alt={`${SecurityUtils.sanitizeHTML(part.title)} ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
@@ -180,7 +180,7 @@ const PartDetails = () => {
                       Stok: {part.stockQuantity} adet
                     </span>
                     <span className="text-sm text-gray-500">
-                      Parça No: {SecurityUtils.sanitizeHtml(part.partNumber)}
+                      Parça No: {SecurityUtils.sanitizeHTML(part.partNumber)}
                     </span>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ const PartDetails = () => {
                     key={index}
                     className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium"
                   >
-                    {SecurityUtils.sanitizeHtml(model)}
+                    {SecurityUtils.sanitizeHTML(model)}
                   </span>
                 ))}
               </div>
@@ -224,7 +224,7 @@ const PartDetails = () => {
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Açıklama</h3>
               <p className="text-gray-700 leading-relaxed">
-                {SecurityUtils.sanitizeHtml(part.description)}
+                {SecurityUtils.sanitizeHTML(part.description)}
               </p>
             </div>
           </div>
@@ -241,28 +241,28 @@ const PartDetails = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="text-2xl font-bold text-orange-600 mb-2">
-                  {SecurityUtils.sanitizeHtml(part.specifications.material)}
+                  {SecurityUtils.sanitizeHTML(part.specifications.material)}
                 </div>
                 <div className="text-sm text-gray-600">Malzeme</div>
               </div>
               
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="text-2xl font-bold text-orange-600 mb-2">
-                  {SecurityUtils.sanitizeHtml(part.specifications.dimensions)}
+                  {SecurityUtils.sanitizeHTML(part.specifications.dimensions)}
                 </div>
                 <div className="text-sm text-gray-600">Boyutlar</div>
               </div>
               
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="text-2xl font-bold text-orange-600 mb-2">
-                  {SecurityUtils.sanitizeHtml(part.specifications.weight)}
+                  {SecurityUtils.sanitizeHTML(part.specifications.weight)}
                 </div>
                 <div className="text-sm text-gray-600">Ağırlık</div>
               </div>
               
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="text-2xl font-bold text-orange-600 mb-2">
-                  {SecurityUtils.sanitizeHtml(part.specifications.warranty)}
+                  {SecurityUtils.sanitizeHTML(part.specifications.warranty)}
                 </div>
                 <div className="text-sm text-gray-600">Garanti</div>
               </div>
