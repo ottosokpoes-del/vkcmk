@@ -34,7 +34,7 @@ export const useSecurity = () => {
   };
 
   const hasRole = (role: string) => {
-    return user && user.role === role;
+    return user && (user as any).role === role;
   };
 
   return {
