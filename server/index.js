@@ -17,7 +17,6 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const validator = require('validator');
-const DOMPurify = require('isomorphic-dompurify');
 require('dotenv').config();
 
 const app = express();
@@ -129,10 +128,13 @@ const SecurityUtils = {
   // Input sanitization
   sanitizeInput: (input) => {
     if (typeof input !== 'string') return input;
-    return DOMPurify.sanitize(input, { 
-      ALLOWED_TAGS: [],
-      ALLOWED_ATTR: []
-    });
+    return input
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .replace(/\//g, '&#x2F;');
   },
 
   // SQL injection prevention
